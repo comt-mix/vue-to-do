@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import MainVue from './pages/MainVue.vue';
+import MainVue from "./pages/MainVue.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     MainVue,
-  }
-}
+  },
+};
 </script>
 
 <style>

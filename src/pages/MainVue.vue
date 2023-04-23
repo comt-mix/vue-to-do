@@ -20,9 +20,13 @@
           <span @click="removeTodo(index)"
             ><font-awesome-icon icon="fa-solid fa-trash"
           /></span>
-          <span><font-awesome-icon icon="fa-solid fa-pen-to-square" /></span>
+          <span @click="updateTodo"
+            ><font-awesome-icon icon="fa-solid fa-pen-to-square"
+          /></span>
         </div>
-        <button class="bottom-button">Pending</button>
+        <button @click="completedTodo()" :class="changeColor(isCompleted)">
+          {{ isCompleted ? "Completed" : "Pending" }}
+        </button>
       </div>
     </li>
   </div>
@@ -35,6 +39,7 @@ export default {
       title: "",
       content: "",
       todoList: [],
+      isCompleted: false,
     };
   },
   methods: {
@@ -42,11 +47,23 @@ export default {
       this.todoList.push({
         title: this.title,
         content: this.content,
+        isCompleted: false,
       });
       (this.title = ""), (this.content = "");
     },
     removeTodo(index) {
       this.todoList.splice(index, 1);
+    },
+    updateTodo() {
+      console.log(this.todoList);
+    },
+    completedTodo() {
+      this.isCompleted = !this.isCompleted;
+      console.log(this.todoList.isCompleted);
+    },
+    changeColor(isCompleted) {
+      if (isCompleted) return "green";
+      return "red";
     },
   },
 };
@@ -102,7 +119,26 @@ li {
   text-align: right;
   margin: 1rem;
 }
-.bottom-button {
+.plus-button {
+  margin-top: 2rem;
+  padding: 0.4rem;
+  border-style: none;
+  border-radius: 0.6rem;
+  border: 2px solid #d3d3d3;
+  background-color: white;
+}
+.green {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.6rem;
+  border-style: none;
+  color: green;
+  border: 3px solid green;
+  background-color: white;
+  font-size: 1.2rem;
+  border-radius: 0 0 0.6rem 0.6rem;
+}
+.red {
   width: 100%;
   margin: 0 auto;
   padding: 0.6rem;
@@ -112,13 +148,5 @@ li {
   background-color: white;
   font-size: 1.2rem;
   border-radius: 0 0 0.6rem 0.6rem;
-}
-.plus-button {
-  margin-top: 2rem;
-  padding: 0.4rem;
-  border-style: none;
-  border-radius: 0.6rem;
-  border: 2px solid #d3d3d3;
-  background-color: white;
 }
 </style>

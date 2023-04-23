@@ -10,14 +10,16 @@
       </div>
     </div>
 
-    <li v-for="(todo, index) in todoList" v-bind:key="index">
+    <li v-for="(todo, index) in todoList" :key="index">
       <div class="box">
         <div class="text">
           <input v-model="todo.title" class="title" />
           <input v-model="todo.content" class="content" />
         </div>
         <div class="icon">
-          <span><font-awesome-icon icon="fa-solid fa-trash" /></span>
+          <span @click="removeTodo(index)"
+            ><font-awesome-icon icon="fa-solid fa-trash"
+          /></span>
           <span><font-awesome-icon icon="fa-solid fa-pen-to-square" /></span>
         </div>
         <button class="bottom-button">Pending</button>
@@ -42,6 +44,9 @@ export default {
         content: this.content,
       });
       (this.title = ""), (this.content = "");
+    },
+    removeTodo(index) {
+      this.todoList.splice(index, 1);
     },
   },
 };

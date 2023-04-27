@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AddList from '@/components/AddList.vue';
+import AddList from "@/components/AddList.vue";
 
 export default {
   data() {
@@ -22,25 +22,35 @@ export default {
       title: "",
       content: "",
       isCompleted: false,
-      todoList: [{
-        title: "111",
-        content: "1",
-        isCompleted: false,
-      }, {
-        title: "222",
-        content: "2",
-        isCompleted: false,
-      }, {
-        title: "333",
-        content: "3",
-        isCompleted: false,
-      }],
+      todoList: [
+        {
+          id: 1,
+          title: "111",
+          content: "1",
+          isCompleted: false,
+        },
+        {
+          id: 2,
+          title: "222",
+          content: "2",
+          isCompleted: false,
+        },
+        {
+          id: 3,
+          title: "333",
+          content: "3",
+          isCompleted: false,
+        },
+      ],
     };
   },
+
   components: {
-    AddList
+    AddList,
   },
+
   methods: {
+    removeTodo() {},
     addTodo() {
       this.todoList.push({
         title: this.title,
@@ -48,28 +58,6 @@ export default {
         isCompleted: false,
       });
       (this.title = ""), (this.content = "");
-    },
-    removeTodo(index) {
-      this.todoList.splice(index, 1);
-    },
-    updateTodo() {
-      console.log(this.todoList);
-    },
-    completedTodo(title, index) {
-
-      const list = this.todoList.map((list) => list.title)
-      
-      if (list.indexOf(title) === index) {
-        console.log(index, list.indexOf(title))
-        this.todoList[index].isCompleted = !this.todoList[index].isCompleted;
-        this.isCompleted = this.todoList[index].isCompleted;
-      }
-   
-      // console.log(this.todoList.isCompleted, this.isCompleted);
-    },
-    changeColor(isCompleted) {
-      if (isCompleted) return "green";
-      return "red";
     },
   },
 };

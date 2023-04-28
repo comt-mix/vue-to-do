@@ -1,64 +1,20 @@
 <template>
   <div class="container">
     <div class="add-box">
-      <div class="text">
-        <input v-model="title" placeholder="title" class="title" />
-        <input v-model="content" placeholder="content" class="content" />
-        <button @click="addTodo" class="plus-button">
-          <font-awesome-icon icon="fa-solid fa-plus" />
-        </button>
-      </div>
+      <InputText></InputText>
     </div>
-    <AddList :todoList="todoList"></AddList>
+    <TestList></TestList>
   </div>
 </template>
 
 <script>
-import AddList from "@/components/AddList.vue";
+import TestList from "@/components/TestList.vue";
+import InputText from "@/components/InputText.vue";
 
 export default {
-  data() {
-    return {
-      title: "",
-      content: "",
-      isCompleted: false,
-      todoList: [
-        {
-          id: 1,
-          title: "111",
-          content: "1",
-          isCompleted: false,
-        },
-        {
-          id: 2,
-          title: "222",
-          content: "2",
-          isCompleted: false,
-        },
-        {
-          id: 3,
-          title: "333",
-          content: "3",
-          isCompleted: false,
-        },
-      ],
-    };
-  },
-
   components: {
-    AddList,
-  },
-
-  methods: {
-    removeTodo() {},
-    addTodo() {
-      this.todoList.push({
-        title: this.title,
-        content: this.content,
-        isCompleted: false,
-      });
-      (this.title = ""), (this.content = "");
-    },
+    TestList,
+    InputText,
   },
 };
 </script>

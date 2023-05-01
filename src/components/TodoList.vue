@@ -10,15 +10,13 @@
           <span @click="deleteTodo(todo.id)"
             ><font-awesome-icon icon="fa-solid fa-trash"
           /></span>
-          <span @click="updateTodo"
-            ><font-awesome-icon icon="fa-solid fa-pen-to-square"
-          /></span>
+          <span><font-awesome-icon icon="fa-solid fa-pen-to-square" /></span>
         </div>
         <button
           @click="completedTodo(todo.id, todo.isCompleted)"
-          :class="buttonClass"
+          :class="todo.isCompleted ? 'green' : 'red'"
         >
-          {{ buttonTitle }}
+          {{ buttonTitle(todo) }}
         </button>
       </div>
     </li>
@@ -34,36 +32,19 @@ export default {
     };
   },
   methods: {
-    modifyTodo() {
-      console.log(this.todoList);
-      //title, content box에 색상 들어오게 class변경하기
-    },
     deleteTodo(id) {
       this.$store.commit("deleteTodo", id);
     },
     completedTodo(id, isCompleted) {
       this.$store.commit("updateTodo", { id, isCompleted });
     },
+    buttonTitle(todo) {
+      return todo.isCompleted ? "Complete" : "Pending";
+    },
   },
   computed: {
-    storeList() {
-      const list = this.$store.state.todoList;
-
-      return list;
-    },
-    buttonTitle() {
-      if (this.storeList.isCompleted) {
-        return "Completed";
-      } else {
-        return "Pending";
-      }
-    },
     buttonClass() {
-      if (this.storeList.isCompleted) {
-        return "green";
-      } else {
-        return "red";
-      }
+      return this.$store.state.todoList.isCompleted ? "green" : "red";
     },
   },
 };
@@ -78,19 +59,6 @@ input {
 }
 li {
   list-style: none;
-}
-.contanier {
-  width: 100%;
-}
-.add-box {
-  width: 30%;
-  margin: 0 auto;
-  margin-bottom: 1rem;
-  border: 2px solid #d3d3d3;
-  border-radius: 0.6rem;
-}
-.add-box input {
-  border: 2px solid #d3d3d3;
 }
 .box {
   width: 30%;
@@ -118,14 +86,6 @@ li {
 .icon {
   text-align: right;
   margin: 1rem;
-}
-.plus-button {
-  margin-top: 2rem;
-  padding: 0.4rem;
-  border-style: none;
-  border-radius: 0.6rem;
-  border: 2px solid #d3d3d3;
-  background-color: white;
 }
 .green {
   width: 100%;

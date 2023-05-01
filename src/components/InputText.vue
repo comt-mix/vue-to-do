@@ -1,10 +1,12 @@
 <template>
-  <div class="text">
-    <input v-model="todo.title" placeholder="title" class="title" />
-    <input v-model="todo.content" placeholder="content" class="content" />
-    <button @click="addTodo" class="plus-button">
-      <font-awesome-icon icon="fa-solid fa-plus" />
-    </button>
+  <div class="add-box">
+    <div class="text">
+      <input v-model="todo.title" placeholder="title" class="title" />
+      <input v-model="todo.content" placeholder="content" class="content" />
+      <button @click="addTodo" class="plus-button">
+        <font-awesome-icon icon="fa-solid fa-plus" />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -28,8 +30,18 @@ export default {
 </script>
 
 <style>
-input {
-  border-radius: 0.4rem;
+.add-box {
+  width: 30%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  border: 2px solid #d3d3d3;
+  border-radius: 0.6rem;
+}
+.add-box input {
+  border: 2px solid #d3d3d3;
+  border-radius: 0.6rem;
+  padding: 0.4rem;
+  margin-bottom: 0.4rem;
 }
 .text {
   display: flex;
@@ -41,7 +53,15 @@ input {
   font-weight: bold;
 }
 .content {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: gray;
+}
+.plus-button {
+  margin-top: 2rem;
+  padding: 0.4rem;
+  border-style: none;
+  border-radius: 0.6rem;
+  border: 2px solid #d3d3d3;
+  background-color: white;
 }
 </style>

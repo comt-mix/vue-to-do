@@ -2,19 +2,11 @@
   <div>
     <li v-for="todo in $store.state.todoList" :key="todo.id">
       <div class="box">
-        <div class="text">
-          <input v-model="todo.title" class="title" />
-          <input v-model="todo.content" class="content" />
-        </div>
-        <div class="icon">
-          <span @click="deleteTodo(todo.id)"
-            ><font-awesome-icon icon="fa-solid fa-trash"
-          /></span>
-          <span><font-awesome-icon icon="fa-solid fa-pen-to-square" /></span>
-        </div>
+        <ListInput :todo="todo"></ListInput>
+        <ListIcon :todo="todo"></ListIcon>
         <button
           @click="completedTodo(todo.id, todo.isCompleted)"
-          :class="todo.isCompleted ? 'green' : 'red'"
+          :class="buttonClass(todo)"
         >
           {{ buttonTitle(todo) }}
         </button>
@@ -24,27 +16,35 @@
 </template>
 
 <script>
+import ListInput from "./ListInput.vue";
+import ListIcon from "./ListIcon.vue";
+
 export default {
-  data() {
-    return {
-      todoTitle: "",
-      todoContent: "",
-    };
+  components: {
+    ListInput,
+    ListIcon,
   },
   methods: {
-    deleteTodo(id) {
-      this.$store.commit("deleteTodo", id);
-    },
     completedTodo(id, isCompleted) {
       this.$store.commit("updateTodo", { id, isCompleted });
     },
     buttonTitle(todo) {
-      return todo.isCompleted ? "Complete" : "Pending";
+      if (todo.isCompleted) {
+        return "Complete";
+      } else {
+        return "Pending";
+      }
     },
   },
   computed: {
     buttonClass() {
-      return this.$store.state.todoList.isCompleted ? "green" : "red";
+      return (todo) => {
+        if (todo.isCompleted) {
+          return "green";
+        } else {
+          return "red";
+        }
+      };
     },
   },
 };
@@ -67,14 +67,6 @@ li {
   border: 2px solid #d3d3d3;
   border-radius: 0.6rem;
 }
-.box input {
-  border-style: none;
-}
-.text {
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-}
 .title {
   font-size: 1.4rem;
   font-weight: bold;
@@ -82,10 +74,6 @@ li {
 .content {
   font-size: 1.1rem;
   color: gray;
-}
-.icon {
-  text-align: right;
-  margin: 1rem;
 }
 .green {
   width: 100%;

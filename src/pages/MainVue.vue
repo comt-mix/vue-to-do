@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import InputText from "@/components/InputText.vue";
+import InputText from "@/components/AddInput.vue";
 import TodoList from "@/components/TodoList.vue";
 
 export default {

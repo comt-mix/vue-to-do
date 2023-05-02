@@ -1,24 +1,24 @@
 <template>
   <div class="container">
-    <InputText></InputText>
-    <TodoList></TodoList>
+    <AddInput></AddInput>
+    <TodoLists></TodoLists>
   </div>
 </template>
 
 <script>
-import InputText from "@/components/AddInput.vue";
-import TodoList from "@/components/TodoList.vue";
+import AddInput from "@/components/AddInput.vue";
+import TodoLists from "@/components/TodoLists.vue";
 
 export default {
   components: {
-    InputText,
-    TodoList,
+    AddInput,
+    TodoLists,
   },
 };
 </script>
 
-<style>
-.contanier {
+<style scoped>
+.container {
   width: 100%;
 }
 </style>

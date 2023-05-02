@@ -21,15 +21,21 @@ export default {
     };
   },
   methods: {
+    initTodo() {
+      this.todo = {
+        title: "",
+        content: "",
+      };
+    },
     addTodo() {
       this.$store.commit("todo", { ...this.todo });
-      (this.todo.title = ""), (this.todo.content = "");
+      this.initTodo();
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .add-box {
   width: 30%;
   margin: 0 auto;

@@ -22,7 +22,7 @@ export default {
       this.$store.commit("deleteTodo", id);
     },
     editTodo(todo) {
-      todo.isEdited = true;
+      todo.isEdited = true; // props의 todo와 naming이 겹침
     },
   },
 };
